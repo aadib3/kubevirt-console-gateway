@@ -78,7 +78,7 @@ $ date=$(date "+%y%m%d%H%M")
 ```
 
 ## 2- Inject the kubevirtconsolepath into kubevirt-console-token.yam and create the kubevirtconsoletoken custom resource:
-$ sed "s|VMNAME|$vm-$date|g;s|KUBEVIRTCONSOLEPOSTPATH|$kubevirtconsolepath|g" kubevirt-console-token-template.yaml > kubevirt-console-token.yaml
+$ sed "s|VMNAME|$vm-$date|g;s|CONSOLEPATH|$consolepath|g" kubevirt-console-token-template.yaml > kubevirt-console-token.yaml
 
 $ oc create -f kubevirt-console-token.yaml
 ``` bash
