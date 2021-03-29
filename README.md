@@ -41,7 +41,7 @@ $
 
 
 ## 4- Inject the image variables into oc-gate-operator.yaml file and create oc-gate-operator objects:
-$ sed "s|KUBERBCPROXYIMAGE|$kuberbacproxyimage|g;s|KUBEVIRTCONSOLEOPERATORIMAGE|$ocgateoperatorimage|g" kubevirt-console-operator-template.yaml > kubevirt-console-operator.yaml
+$ sed "s|KUBERBCPROXYIMAGE|$kuberbacproxyimage|g;s|KUBEVIRTCONSOLEOPERATORIMAGE|$kubevirtconsoleoperatorimage|g" kubevirt-console-operator-template.yaml > kubevirt-console-operator.yaml
 
 $ oc create -f kubevirt-console-operator.yaml
 ``` bash
@@ -52,7 +52,7 @@ $ oc get all -n oc-gate-operator -l control-plane=controller-manager
 ```
 
 
-## 5- Inject the ocgateimage and ocgateroute variables into gateserver.yaml and create the GateServer custom resource:
+## 5- Inject the kubevirtconsoleimage and kubevirtconsoleroute variables into kubevirt-console-server.yaml and create the kubevirtconsoleserver custom resource:
 
 $ sed "s|KUBEVIRTCONSOLEIMAGE|$kubevirtconsoleimage|g;s|KUBEVIRTCONSOLEROUTE|$kubevirtconsoleroute|g;s|KUBEVIRTCONSOLEWEBIMAGE|$kubevirtconsolewebimage|g" kubevirt-console-server-template.yaml > kubevirt-console-server.yaml
 
@@ -63,6 +63,7 @@ $ oc create -f kubevirt-console-server.yaml
 $ oc get kcs,po,deployment,svc,route -n kubevirt-console
 ``` bash
 ```
+
 # Steps to authenticate access to a virtual machine noVNC console (Everytime console access is required)
 
 ## 1- Set the following variables required for creating the operator CRs:
@@ -76,7 +77,7 @@ $ postpath=/noVNC/vnc_lite.html?path=$kubevirtconsolepath
 $ date=$(date "+%y%m%d%H%M")
 ```
 
-## 2- Inject the ocgatepath into gatetoken.yaml and create the GateToken custom resource:
+## 2- Inject the kubevirtconsolepath into kubevirt-console-token.yam and create the kubevirtconsoletoken custom resource:
 $ sed "s|VMNAME|$vm-$date|g;s|KUBEVIRTCONSOLEPOSTPATH|$kubevirtconsolepath|g" kubevirt-console-token-template.yaml > kubevirt-console-token.yaml
 
 $ oc create -f kubevirt-console-token.yaml
@@ -85,7 +86,7 @@ $ oc create -f kubevirt-console-token.yaml
 
 $ bt=bearer token
 
-$ apipath="https://api.ocp4.xxx.xxx:6443/apis/ocgate.yaacov.com/v1beta1/namespaces/oc-gate/gatetokens"
+$ apipath="https://api.ocp4.xxx.xxx:6443/apis/gateway.yaacov.com/v1beta1/namespaces/oc-gate/gatetokens"
 
 $ data=\'{\"apiVersion\":\"gateway.yaacov.com/v1beta1\",\"kind\":\"KubevirtConsoleToken\",\"metadata\":{\"name\":\"$vm-$date\",\"namespace\":\"kubevirt-console\"},\"spec\":{\"match-path\":\"^/$consolepath\"}}\'
 
