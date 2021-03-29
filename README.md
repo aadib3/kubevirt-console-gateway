@@ -40,14 +40,14 @@ $
 ```
 
 
-## 4- Inject the image variables into oc-gate-operator.yaml file and create oc-gate-operator objects:
+## 4- Inject the image variables into kubevirt-console-operator.yaml file and create kubevirt-console-operator objects:
 $ sed "s|KUBERBCPROXYIMAGE|$kuberbacproxyimage|g;s|KUBEVIRTCONSOLEOPERATORIMAGE|$kubevirtconsoleoperatorimage|g" kubevirt-console-operator-template.yaml > kubevirt-console-operator.yaml
 
 $ oc create -f kubevirt-console-operator.yaml
 ``` bash
 ```
 
-$ oc get all -n oc-gate-operator -l control-plane=controller-manager
+$ oc get all -n kubevirt-console-operator -l control-plane=controller-manager
 ``` bash
 ```
 
@@ -86,14 +86,14 @@ $ oc create -f kubevirt-console-token.yaml
 
 $ bt=bearer token
 
-$ apipath="https://api.ocp4.xxx.xxx:6443/apis/gateway.yaacov.com/v1beta1/namespaces/oc-gate/gatetokens"
+$ apipath="https://api.ocp4.xxx.xxx:6443/apis/gateway.yaacov.com/v1beta1/namespaces/kubevirt-console/kubevirtconsoletoken"
 
 $ data=\'{\"apiVersion\":\"gateway.yaacov.com/v1beta1\",\"kind\":\"KubevirtConsoleToken\",\"metadata\":{\"name\":\"$vm-$date\",\"namespace\":\"kubevirt-console\"},\"spec\":{\"match-path\":\"^/$consolepath\"}}\'
 
 $ curl -k -H 'Accept: application/json' -H \"Authorization: Bearer $bt\" -H \"Content-Type: application/json\" --request POST --data $data $apipath
 
 ## 3- Set and display the content of consoleurl:
-$ token=$(oc describe gatetoken $vm-$date -n oc-gate | grep Token: | awk '{print $2}')
+$ token=$(oc describe gatetoken $vm-$date -n kubevirt-console | grep Token: | awk '{print $2}')
 
 $ consoleurl=${posturl}?token=${token}\\&then=$postpath
 
