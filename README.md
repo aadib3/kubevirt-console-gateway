@@ -2,8 +2,8 @@
 
 ## 1- Clone kubevirt-console-operator git repository:
 ``` bash
-$ git clone https://github.com/aadib3/kubevirt-console-operator.git
-Cloning into 'kubevirt-console-operator'...
+$ git clone https://github.com/aadib3/kubevirt-console-gateway.git
+Cloning into 'kubevirt-console-gateway'...
 remote: Enumerating objects: 29, done.
 remote: Counting objects: 100% (29/29), done.
 remote: Compressing objects: 100% (18/18), done.
