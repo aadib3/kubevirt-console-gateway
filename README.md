@@ -1,6 +1,6 @@
-# Steps to deploy oc-gate operator on OCP cluster (One Time Setup)
+# Steps to deploy kubevirt-console-gateway operator on OCP cluster (One Time Setup)
 
-## 1- Clone oc-gate-operator git repository:
+## 1- Clone kubevirt-console-operator git repository:
 ``` bash
 $ git clone https://github.com/aadib3/kubevirt-console-operator.git
 Cloning into 'kubevirt-console-operator'...
