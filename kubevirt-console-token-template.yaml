@@ -4,5 +4,4 @@ metadata:
   name: VMNAME
   namespace: kubevirt-console
 spec:
-  image: KUBEVIRTCONSOLEIMAGE
-  match-path: ^/CONSOLEPOSTPATH
+  match-path: ^/CONSOLEPATH
