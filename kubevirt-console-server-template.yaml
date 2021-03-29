@@ -1,9 +1,9 @@
-apiVersion: ocgate.yaacov.com/v1beta1
-kind: GateServer
+apiVersion: gateway.yaacov.com/v1beta1
+kind: KubevirtConsoleServer
 metadata:
-  name: gateserver
-  namespace: oc-gate
+  name: kubevirtconsoleserver
+  namespace: kubevirt-console
 spec:
-  image: OCGATEIMAGE
-  web-app-image: OCGATEWEBIMAGE
-  route: OCGATEROUTE
+  image: KUBEVIRTCONSOLEIMAGE
+  web-app-image: KUBEVIRTCONSOLEWEBIMAGE
+  route: KUBEVIRTCONSOLEROUTE

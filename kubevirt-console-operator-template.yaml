@@ -374,29 +374,29 @@ rules:
   - list
   - watch
 - apiGroups:
-  - ocgate.yaacov.com
+  - gateway.yaacov.com
   resources:
-  - gateservers/finalizers
+  - kubevirtconsoleservers/finalizers
   verbs:
   - update
 - apiGroups:
-  - ocgate.yaacov.com
+  - gateway.yaacov.com
   resources:
-  - gateservers/status
+  - kubevirtconsoleservers/status
   verbs:
   - get
   - patch
   - update
 - apiGroups:
-  - ocgate.yaacov.com
+  - gateway.yaacov.com
   resources:
-  - gatetokens/finalizers
+  - kubevirtconsoletokens/finalizers
   verbs:
   - update
 - apiGroups:
-  - ocgate.yaacov.com
+  - gateway.yaacov.com
   resources:
-  - gatetokens/status
+  - kubevirtconsoletokens/status
   verbs:
   - get
   - patch
