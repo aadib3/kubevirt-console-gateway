@@ -17,8 +17,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.4.1
-  creationTimestamp: null
-  name: kubevirtconsoleserver.gateway.yaacov.com
+  name: kubevirtconsoleservers.gateway.yaacov.com
 spec:
   group: gateway.yaacov.com
   names:
@@ -156,8 +155,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.4.1
-  creationTimestamp: null
-  name: kubevirtconsoletoken.gateway.yaacov.com
+  name: kubevirtconsoletokens.gateway.yaacov.com
 spec:
   group: gateway.yaacov.com
   names:
