@@ -313,7 +313,7 @@ spec:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: kubevirt-console-gateway-operator-leader-election-role
+  name: kubevirt-console-gateway-leader-election-role
   namespace: kubevirt-console-gateway-operator
 rules:
 - apiGroups:
@@ -341,7 +341,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: kubevirt-console-gateway-operator-manager-role
+  name: kubevirt-console-gateway-manager-role
 rules:
 - apiGroups:
   - ""
@@ -426,7 +426,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: kubevirt-console-gateway-operator-proxy-role
+  name: kubevirt-console-gateway-proxy-role
 rules:
 - apiGroups:
   - authentication.k8s.io
@@ -444,12 +444,12 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: kubevirt-console-gateway-operator-leader-election-rolebinding
+  name: kubevirt-console-gateway-leader-election-rolebinding
   namespace: kubevirt-console-gateway-operator
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: kubevirt-console-gateway-operator-leader-election-role
+  name: kubevirt-console-gateway-leader-election-role
 subjects:
 - kind: ServiceAccount
   name: default
@@ -458,11 +458,11 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: kubevirt-console-gateway-operator-manager-rolebinding
+  name: kubevirt-console-gateway-manager-rolebinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: kubevirt-console-gateway-operator-manager-role
+  name: kubevirt-console-gateway-manager-role
 subjects:
 - kind: ServiceAccount
   name: default
@@ -471,11 +471,11 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: kubevirt-console-gateway-operator-proxy-rolebinding
+  name: kubevirt-console-gateway-proxy-rolebinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: kubevirt-console-gateway-operator-proxy-role
+  name: kubevirt-console-gateway-proxy-role
 subjects:
 - kind: ServiceAccount
   name: default
@@ -497,7 +497,7 @@ data:
       resourceName: cce4a833.yaacov.com
 kind: ConfigMap
 metadata:
-  name: kubevirt-console-gateway-operator-manager-config
+  name: kubevirt-console-gateway-manager-config
   namespace: kubevirt-console-gateway-operator
 ---
 apiVersion: v1
@@ -505,7 +505,7 @@ kind: Service
 metadata:
   labels:
     control-plane: controller-manager
-  name: kubevirt-console-gateway-operator-controller-manager-metrics-service
+  name: kubevirt-console-gateway-controller-manager-metrics-service
   namespace: kubevirt-console-gateway-operator
 spec:
   ports:
@@ -520,7 +520,7 @@ kind: Deployment
 metadata:
   labels:
     control-plane: controller-manager
-  name: kubevirt-console-gateway-operator-controller-manager
+  name: kubevirt-console-gateway-controller-manager
   namespace: kubevirt-console-gateway-operator
 spec:
   replicas: 1
