@@ -2,7 +2,7 @@ apiVersion: gateway.yaacov.com/v1beta1
 kind: KubevirtConsoleServer
 metadata:
   name: kubevirtconsoleserver
-  namespace: kubevirt-console
+  namespace: kubevirt-console-gateway
 spec:
   image: KUBEVIRTCONSOLEIMAGE
   web-app-image: KUBEVIRTCONSOLEWEBIMAGE

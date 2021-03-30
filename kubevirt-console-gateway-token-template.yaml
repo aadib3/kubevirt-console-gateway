@@ -2,6 +2,6 @@ apiVersion: gateway.yaacov.com/v1beta1
 kind: kubevirtconsoletoken
 metadata:
   name: VMNAME
-  namespace: kubevirt-console
+  namespace: kubevirt-console-gateway
 spec:
   match-path: ^/CONSOLEPATH
