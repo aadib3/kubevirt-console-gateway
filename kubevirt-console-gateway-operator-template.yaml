@@ -3,14 +3,20 @@ kind: Namespace
 metadata:
   labels:
     control-plane: controller-manager
-  name: kubevirt-console-operator
+  name: kubevirt-console-gateway-operator
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   labels:
     control-plane: controller-manager
-  name: kubevirt-console
+  name: kubevirt-console-gateway
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: vx-sa
+  namespace: kubevirt-console-gateway
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -68,7 +74,7 @@ spec:
                 type: string
               gnerate-secret:
                 default: true
-                description: gnerate-secret determain if a secrete with public and private kes will be automatically generated when the kubevirt-console-server is created. Defalut value is true.
+                description: gnerate-secret determain if a secrete with public and private kes will be automatically generated when the kubevirt-console-gateway-server is created. Defalut value is true.
                 type: boolean
               image:
                 default: quay.io/yaacov/oc-gate:latest
@@ -307,8 +313,8 @@ spec:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: kubevirt-console-operator-leader-election-role
-  namespace: kubevirt-console-operator
+  name: kubevirt-console-gateway-operator-leader-election-role
+  namespace: kubevirt-console-gateway-operator
 rules:
 - apiGroups:
   - ""
@@ -335,7 +341,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: kubevirt-console-operator-manager-role
+  name: kubevirt-console-gateway-operator-manager-role
 rules:
 - apiGroups:
   - ""
@@ -420,7 +426,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: kubevirt-console-operator-proxy-role
+  name: kubevirt-console-gateway-operator-proxy-role
 rules:
 - apiGroups:
   - authentication.k8s.io
@@ -438,42 +444,42 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: kubevirt-console-operator-leader-election-rolebinding
-  namespace: kubevirt-console-operator
+  name: kubevirt-console-gateway-operator-leader-election-rolebinding
+  namespace: kubevirt-console-gateway-operator
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: kubevirt-console-operator-leader-election-role
+  name: kubevirt-console-gateway-operator-leader-election-role
 subjects:
 - kind: ServiceAccount
   name: default
-  namespace: kubevirt-console-operator
+  namespace: kubevirt-console-gateway-operator
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: kubevirt-console-operator-manager-rolebinding
+  name: kubevirt-console-gateway-operator-manager-rolebinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: kubevirt-console-operator-manager-role
+  name: kubevirt-console-gateway-operator-manager-role
 subjects:
 - kind: ServiceAccount
   name: default
-  namespace: kubevirt-console-operator
+  namespace: kubevirt-console-gateway-operator
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: kubevirt-console-operator-proxy-rolebinding
+  name: kubevirt-console-gateway-operator-proxy-rolebinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: kubevirt-console-operator-proxy-role
+  name: kubevirt-console-gateway-operator-proxy-role
 subjects:
 - kind: ServiceAccount
   name: default
-  namespace: kubevirt-console-operator
+  namespace: kubevirt-console-gateway-operator
 ---
 apiVersion: v1
 data:
@@ -491,16 +497,16 @@ data:
       resourceName: cce4a833.yaacov.com
 kind: ConfigMap
 metadata:
-  name: kubevirt-console-operator-manager-config
-  namespace: kubevirt-console-operator
+  name: kubevirt-console-gateway-operator-manager-config
+  namespace: kubevirt-console-gateway-operator
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
     control-plane: controller-manager
-  name: kubevirt-console-operator-controller-manager-metrics-service
-  namespace: kubevirt-console-operator
+  name: kubevirt-console-gateway-operator-controller-manager-metrics-service
+  namespace: kubevirt-console-gateway-operator
 spec:
   ports:
   - name: https
@@ -514,8 +520,8 @@ kind: Deployment
 metadata:
   labels:
     control-plane: controller-manager
-  name: kubevirt-console-operator-controller-manager
-  namespace: kubevirt-console-operator
+  name: kubevirt-console-gateway-operator-controller-manager
+  namespace: kubevirt-console-gateway-operator
 spec:
   replicas: 1
   selector:
